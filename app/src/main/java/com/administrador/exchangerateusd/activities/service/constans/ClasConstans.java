@@ -13,6 +13,13 @@ public class ClasConstans {
     public final static String COLOR_STATE_START = "#00FF00";
     public final static String COLOR_STATE_STOP = "#FFFFFF";
     public static final String URL_ENDPOINT = "https://api.fixer.io/";
+    public static final String COIN_BASE_RATES = "USD";
+    public static final String VALUE_CONTAINER_COIN = "rates";
+    public static final String LABEL_COIN_BASE = "base";
+    public static final String LABEL_DATE_CHANGE = "date";
+
+
+
 
 
 

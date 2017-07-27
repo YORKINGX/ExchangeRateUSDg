@@ -5,15 +5,32 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.administrador.exchangerateusd.R;
+import com.administrador.exchangerateusd.activities.model.RatesUsd;
 import com.administrador.exchangerateusd.activities.service.ServiceManager;
 import com.administrador.exchangerateusd.activities.service.callback.CallBackChangeRates;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.util.ArrayList;
 import java.util.Map;
 
+import static com.administrador.exchangerateusd.activities.service.constans.ClasConstans.COIN_BASE_RATES;
+import static com.administrador.exchangerateusd.activities.service.constans.ClasConstans.LABEL_COIN_BASE;
+import static com.administrador.exchangerateusd.activities.service.constans.ClasConstans.LABEL_DATE_CHANGE;
+import static com.administrador.exchangerateusd.activities.service.constans.ClasConstans.VALUE_CONTAINER_COIN;
+
 public class MainActivity extends AppCompatActivity {
+
+    ArrayList<RatesUsd> mArrayListRatesCoin = new ArrayList<RatesUsd>();
+    String containerValue;
+    String rates = "rates";
+    String baseCoin;
+    String changeFechRates;
+
+    boolean ratebase;
+    boolean ratedate;
+    boolean ratecoin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +44,23 @@ public class MainActivity extends AppCompatActivity {
 
                JsonObject jsonObject = ListCoinRates;
                Gson gson = new Gson();
+               for (Map.Entry<String,JsonElement> entry : jsonObject.entrySet()){
+                   RatesUsd mRatesCoin = new RatesUsd();
+                   containerValue = entry.getKey();
+
+                   if (containerValue.equals(LABEL_COIN_BASE)){baseCoin = entry.getValue().toString();}
+                   if (containerValue.equals(LABEL_DATE_CHANGE)){changeFechRates = entry.getValue().toString();}
+                   if (containerValue.equals(VALUE_CONTAINER_COIN)){
+                       mRatesCoin = gson.fromJson(entry.getValue(), RatesUsd.class);
+
+
+
+
+
+                       mArrayListRatesCoin.add(mRatesCoin);
+                   }
+                 }
+
 
 
            }
